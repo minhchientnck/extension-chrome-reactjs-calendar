@@ -1,0 +1,19 @@
+.container {
+  width: 500px;
+}
+
+button {
+  outline: none;
+  padding: 0;
+  border: 0;
+  margin: 0;
+  font-size: 5px;
+  border-radius: 50%;
+  display: flex;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+.icon.prev:active,.icon.next:active {
+  background-color: #cbcaca;
+}

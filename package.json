@@ -1,0 +1,32 @@
+{
+  "name": "demowebpack",
+  "version": "1.0.0",
+  "description": "demo webpack",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "node scripts/build.js",
+    "start": "webpack serve --config config/webpack.config.js --progress --profile --watch --content-base src"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "babel-core": "^6.26.3",
+    "babel-loader": "^7.1.5",
+    "babel-preset-env": "^1.7.0",
+    "babel-preset-react": "^6.24.1",
+    "copy-webpack-plugin": "^7.0.0",
+    "css-loader": "^5.0.1",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^4.5.0",
+    "style-loader": "^2.0.0",
+    "webpack": "^5.11.0",
+    "webpack-cli": "^4.3.0",
+    "webpack-dev-server": "^3.11.0"
+  },
+  "dependencies": {
+    "prop-types": "^15.7.2",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  }
+}
