@@ -124,7 +124,9 @@ const Calendar = props => {
     setMonth(tmonth);
   };
 
-  return (<div className="container">
+  return (<div className="container" style={{
+    width: `${props.width}px`,
+  }}>
     <svg
       viewBox="-2 -12 109 70"
       xmlns="http://www.w3.org/2000/svg"
@@ -197,7 +199,7 @@ Calendar.propsType = {
 };
 
 Calendar.defaultProps = {
-  width: 200,
+  width: 390,
   color: '#000',
   strokeWidth: .025,
 };

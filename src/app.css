@@ -7,3 +7,7 @@ html {
 body {
   background-color: #fff;
 }
+
+.app {
+  display: flex;
+}

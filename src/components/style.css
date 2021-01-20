@@ -1,5 +1,11 @@
 .container {
-  width: 500px;
+  width: 320px;
+  height: 250px;
+  margin: 0 10px;
+}
+.date-label {
+  text-align: center;
+  font-size: 11px;
 }
 
 button {

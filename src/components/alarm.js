@@ -22,7 +22,9 @@ const Alarm = (props) => {
   const secondDeg = (second * 6) % 360;
   return (
     <div className="container" style={{
-      width: `${props.width}px`
+      width: `${props.width}px`,
+      height: '200px',
+      marginTop: '43px',
     }}>
       <svg viewBox="-1 -1 2 2" xmlns="http://www.w3.org/2000/svg" >
         <circle cx="0" cy="0" r=".98" fill="none" stroke={props.color} strokeWidth={`${props.strokeWidth}`} />
@@ -149,7 +151,7 @@ Alarm.propsType = {
 };
 
 Alarm.defaultProps = {
-  width: 200,
+  width: 170,
   color: '#000',
   strokeWidth: .025,
 };
