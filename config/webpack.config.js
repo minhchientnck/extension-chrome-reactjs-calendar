@@ -1,7 +1,7 @@
 var path = require('path');
 var fs = require('fs');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
-var CopyPlugin = require("copy-webpack-plugin");
+var CopyPlugin = require('copy-webpack-plugin');
 
 var appDirectory = fs.realpathSync(process.cwd());
 
@@ -22,9 +22,14 @@ module.exports = {
   module: {
     rules: [
       {
-        use: 'babel-loader',
+        use: [{
+          loader: 'babel-loader',
+          options: {
+            minified: false,
+          },
+        }],
         exclude: /node_modules/,
-        test: /\.js$/,
+        test: /\.js?$/,
       },
       {
         use: ['style-loader', 'css-loader'],
@@ -45,10 +50,10 @@ module.exports = {
     }),
     new CopyPlugin({
       patterns: [
-        { from: "./src/images", to: "images" },
-        { from: "./src/manifest.json", to: "./" },
-        { from: "./src/background.js", to: "./" },
-        { from: "./src/_locales", to: "./_locales" },
+        { from: './src/images', to: 'images' },
+        { from: './src/manifest.json', to: './' },
+        { from: './src/background.js', to: './' },
+        { from: './src/_locales', to: './_locales' },
       ],
     }),
   ],

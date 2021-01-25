@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropsType from 'prop-types';
-import './style.css';
+import './styles.css';
 
 const Alarm = (props) => {
   const [date, setDate] = useState(new Date());

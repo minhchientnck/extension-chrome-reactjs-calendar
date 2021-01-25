@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import PropsType from 'prop-types';
 import {
   getDatesOfMonth,
@@ -6,8 +6,10 @@ import {
   getStyleTextDate,
   SUN_COLOR,
   SAT_COLOR,
-} from './calendarUtils';
-import './style.css';
+  MONTH_NAMES,
+} from './libs/calendarUtils';
+import { convertSolar2Lunar } from './libs/lunarUtils';
+import './styles.css';
 
 const Cell = props => (<svg
   x={props.x}
@@ -18,7 +20,7 @@ const Cell = props => (<svg
     x="0" y="0"
     width={props.width}
     height={props.height}
-    stroke="#dfdfdf"
+    stroke="none"
     strokeWidth="1"
     fill={props.rectFill}
   />
@@ -30,7 +32,17 @@ const Cell = props => (<svg
     textAnchor="middle"
     fontSize="4"
   >
-    {props.text}
+    {props.biggerText}
+  </text>
+  <text x="80%" y="75%"
+    opacity={props.opacity}
+    fill={props.textColor}
+    fontWeight="600"
+    alignmentBaseline="middle"
+    textAnchor="middle"
+    fontSize="2.5"
+  >
+    {props.smallerText}
   </text>
 </svg>);
 
@@ -41,7 +53,9 @@ Cell.propsType = {
   height: PropsType.number.isRequired,
   rectFill: PropsType.string.isRequired,
   textColor: PropsType.string.isRequired,
-  opacity: PropsType.string.isRequired,
+  opacity: PropsType.number.isRequired,
+  biggerText: PropsType.string.isRequired,
+  smallerText: PropsType.string.isRequired,
 };
 
 Cell.defaultProps = {
@@ -68,6 +82,12 @@ export const getCalendar = (month, year) => {
     for (j = 0; j < 7; j++) {
       var index = j + row;
       var date = datesOfMonth[index];
+      var solarDD = date.getDate();
+      var solarMM = date.getMonth();
+      var solarYY = date.getFullYear();
+      var tz = date.getTimezoneOffset() / (-60);
+      var [lunarDD, lunarMM, lunarYY, lunarLeap] = convertSolar2Lunar(solarDD, solarMM + 1, solarYY, tz);
+      
       var cell = (<Cell
         key={i + j}
         x={j * 15}
@@ -75,7 +95,8 @@ export const getCalendar = (month, year) => {
         textColor={getStyleTextDate(date, month).textColor}
         opacity={getStyleTextDate(date, month).opacity}
         rectFill={getStyleCurrentDate(date)}
-        text={date.getDate()}
+        biggerText={solarDD}
+        smallerText={`${lunarDD === 1 ? `${lunarDD}/${lunarMM}${lunarLeap ? 'N' : ''}` : lunarDD}`}
       />);
       weekOfCalendar.push(cell);
     }
@@ -85,8 +106,6 @@ export const getCalendar = (month, year) => {
   }
   return datesOfCalendar;
 };
-
-const MM_MONTHS = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
 const Calendar = props => {
   const currentDate = new Date();
@@ -148,7 +167,7 @@ const Calendar = props => {
           </svg>
         </button>
       </foreignObject>
-      <foreignObject x="97" y="-10" width="8" height="8">
+      <foreignObject x="97.5" y="-10" width="8" height="8">
         <button className="icon next" onClick={onNext}>
           <svg x="97" y="-10" width="8" height="8" aria-hidden="true"
             focusable="false"
@@ -175,17 +194,17 @@ const Calendar = props => {
           dominantBaseline="middle"
           textAnchor="middle"
         >
-          {MM_MONTHS[month]} - {year}
+          {MONTH_NAMES[month]} - {year}
         </text>    
       </svg>
       <g>
-        <Cell x="00" y="00" height="08" rectFill="#eee" textColor={SUN_COLOR} text="Sun" />
-        <Cell x="15" y="00" height="08" rectFill="#eee" text="Mon" />
-        <Cell x="30" y="00" height="08" rectFill="#eee" text="Tue" />
-        <Cell x="45" y="00" height="08" rectFill="#eee" text="Wed" />
-        <Cell x="60" y="00" height="08" rectFill="#eee" text="Thu" />
-        <Cell x="75" y="00" height="08" rectFill="#eee" text="Fri" />
-        <Cell x="90" y="00" height="08" rectFill="#eee" textColor={SAT_COLOR} text="Sat" />
+        <Cell x="00" y="00" height="08" rectFill="#eee" textColor={SUN_COLOR} biggerText="CN" />
+        <Cell x="15" y="00" height="08" rectFill="#eee" biggerText="T2" />
+        <Cell x="30" y="00" height="08" rectFill="#eee" biggerText="T3" />
+        <Cell x="45" y="00" height="08" rectFill="#eee" biggerText="T4" />
+        <Cell x="60" y="00" height="08" rectFill="#eee" biggerText="T5" />
+        <Cell x="75" y="00" height="08" rectFill="#eee" biggerText="T5" />
+        <Cell x="90" y="00" height="08" rectFill="#eee" textColor={SAT_COLOR} biggerText="T7" />
       </g>
       {calendar.map(week => week.map(day => day))}
     </svg>

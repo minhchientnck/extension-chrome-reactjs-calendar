@@ -4,12 +4,21 @@ export const CURR_BG_COLOR = '#f6e91e';
 export const DEFAULT_COLOR = '#000';
 export const NONE_FILL = 'none';
 
+export const MONTH_NAMES = [
+  'Tháng 1', 'Tháng 2', 
+  'Tháng 3', 'Tháng 4',
+  'Tháng 5', 'Tháng 6',
+  'Tháng 7', 'Tháng 8',
+  'Tháng 9', 'Tháng 10', 
+  'Tháng 11', 'Tháng 12',
+];
+
 /**
  * get dates of month
  * @param {*} month
  * @param {*} year
  */
-export const getDatesOfMonth = (month, year) => {
+export function getDatesOfMonth(month, year){
   var currentDate = new Date();
   var currentMonth = month;
   var currentYear = year;
@@ -51,15 +60,14 @@ export const getDatesOfMonth = (month, year) => {
     cellDate.setDate(h + 1);
     datesOfNextMonth.push(new Date(cellDate));
   }
-  datesOfMonth = datesOfMonth.concat(datesOfNextMonth);
-  return datesOfMonth;
+  return datesOfMonth.concat(datesOfNextMonth);
 };
 
 /**
  * get style current date
  * @param {*} date 
  */
-export const getStyleCurrentDate = (date) => {
+export function getStyleCurrentDate(date){
   var currentDate = new Date();
   if (currentDate.getDate() === date.getDate() &&
     currentDate.getMonth() === date.getMonth() &&
@@ -74,7 +82,7 @@ export const getStyleCurrentDate = (date) => {
  * @param {*} date 
  * @param {*} currentMonth 
  */
-export const getStyleTextDate = (date, currentMonth) => {
+export function getStyleTextDate(date, currentMonth){
   var textColor = DEFAULT_COLOR;
   var opacity = 1;
   if (date.getDay() === 0) {
@@ -86,8 +94,5 @@ export const getStyleTextDate = (date, currentMonth) => {
     textColor = DEFAULT_COLOR;
     opacity = 0.5;
   }
-  return {
-    textColor,
-    opacity,
-  }
+  return { textColor, opacity };
 };
