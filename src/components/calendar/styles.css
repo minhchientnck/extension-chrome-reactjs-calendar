@@ -1,6 +1,6 @@
 .container {
   width: 320px;
-  height: 250px;
+  height: auto;
   margin: 0 10px;
 }
 .date-label {
