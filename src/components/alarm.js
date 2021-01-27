@@ -29,7 +29,7 @@ const Alarm = (props) => {
       <svg viewBox="-1 -1 102 130" xmlns="http://www.w3.org/2000/svg" >
         <circle cx="50" cy="50" r="50" fill="none" stroke={props.color} strokeWidth={`${props.strokeWidth}`} />
         <polygon
-          points="50,50 47,40 50,20 53,40"
+          points="50,50 47,40 50,22 53,40"
           fill="#ff0303"
           stroke="#ff0303"
           strokeWidth={`${props.strokeWidth}`}
