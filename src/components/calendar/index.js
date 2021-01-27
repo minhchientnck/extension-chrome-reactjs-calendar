@@ -203,7 +203,7 @@ const Calendar = props => {
         <Cell x="30" y="00" height="08" rectFill="#eee" biggerText="T3" />
         <Cell x="45" y="00" height="08" rectFill="#eee" biggerText="T4" />
         <Cell x="60" y="00" height="08" rectFill="#eee" biggerText="T5" />
-        <Cell x="75" y="00" height="08" rectFill="#eee" biggerText="T5" />
+        <Cell x="75" y="00" height="08" rectFill="#eee" biggerText="T6" />
         <Cell x="90" y="00" height="08" rectFill="#eee" textColor={SAT_COLOR} biggerText="T7" />
       </g>
       {calendar.map(week => week.map(day => day))}
