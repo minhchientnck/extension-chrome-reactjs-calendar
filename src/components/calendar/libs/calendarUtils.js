@@ -1,3 +1,5 @@
+import XDate from '../../XDate';
+
 export const SUN_COLOR = '#ff7979';
 export const SAT_COLOR = '#0872ff';
 export const CURR_BG_COLOR = '#f6e91e';
@@ -19,19 +21,19 @@ export const MONTH_NAMES = [
  * @param {*} year
  */
 export function getDatesOfMonth(month, year){
-  var currentDate = new Date();
+  var currentDate = new XDate();
   var currentMonth = month;
   var currentYear = year;
   currentDate.setDate(1);
   currentDate.setMonth(currentMonth);
   currentDate.setFullYear(currentYear);
   // dates of before month
-  var cellDate = new Date(currentDate);
-  var startedDayOfMonth = currentDate.getDay();
+  var cellDate = new XDate(currentDate);
+  var startedDayOfMonth = currentDate.getXDay();
   var datesOfBeforeMonth = [];
   for (var i = 0; i < startedDayOfMonth; i++) {
     cellDate.setHours(-24);
-    datesOfBeforeMonth.push(new Date(cellDate));
+    datesOfBeforeMonth.push(new XDate(cellDate));
   }
   datesOfBeforeMonth = datesOfBeforeMonth.reverse();
   // dates of current month
@@ -42,25 +44,26 @@ export function getDatesOfMonth(month, year){
   for (j = 0; j < 6; j++) {
     for (k = 0; k < 7; k++) {
       var count = k + 1 + row;
-      cellDate = new Date(currentDate);
+      cellDate = new XDate(currentDate);
       cellDate.setDate(count);
       if (cellDate.getMonth() === currentMonth) {
-        datesOfMonth.push(new Date(cellDate));
+        datesOfMonth.push(new XDate(cellDate));
       }
     }
     row = k * (j + 1);
   }
-  datesOfMonth = datesOfBeforeMonth.concat(datesOfMonth);
+  datesOfMonth = [...datesOfBeforeMonth, ...datesOfMonth];
   // dates of next month
   var datesOfNextMonth = [];
   var nextMonth = currentMonth + 1;
-  cellDate = new Date(currentDate);
+  cellDate = new XDate(currentDate);
   for (var h = 0; h < (42 - datesOfMonth.length); h++) {
     cellDate.setMonth(nextMonth);
     cellDate.setDate(h + 1);
-    datesOfNextMonth.push(new Date(cellDate));
+    datesOfNextMonth.push(new XDate(cellDate));
   }
-  return datesOfMonth.concat(datesOfNextMonth);
+  datesOfMonth = [...datesOfMonth, ...datesOfNextMonth];
+  return datesOfMonth;
 };
 
 /**
@@ -68,7 +71,7 @@ export function getDatesOfMonth(month, year){
  * @param {*} date 
  */
 export function getStyleCurrentDate(date){
-  var currentDate = new Date();
+  var currentDate = new XDate();
   if (currentDate.getDate() === date.getDate() &&
     currentDate.getMonth() === date.getMonth() &&
     currentDate.getFullYear() === date.getFullYear()) {
@@ -85,9 +88,9 @@ export function getStyleCurrentDate(date){
 export function getStyleTextDate(date, currentMonth){
   var textColor = DEFAULT_COLOR;
   var opacity = 1;
-  if (date.getDay() === 0) {
+  if (date.getXDay() === 0) {
     textColor = SUN_COLOR;
-  } else if (date.getDay() === 6) {
+  } else if (date.getXDay() === 6) {
     textColor = SAT_COLOR;
   }
   if (date.getMonth() !== currentMonth) {

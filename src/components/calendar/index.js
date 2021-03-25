@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import PropsType from 'prop-types';
+import XDate from '../XDate';
 import {
   getDatesOfMonth,
   getStyleCurrentDate,
@@ -108,13 +109,13 @@ export const getCalendar = (month, year) => {
 };
 
 const Calendar = props => {
-  const currentDate = new Date();
+  const currentDate = new XDate();
   const [month, setMonth] = useState(currentDate.getMonth());
   const [year, setYear] =  useState(currentDate.getFullYear());
   const calendar = getCalendar(month, year);
 
   const onReset = () => {
-    const currentDate = new Date();
+    const currentDate = new XDate();
     setMonth(currentDate.getMonth());
     setYear(currentDate.getFullYear());
   };
@@ -198,13 +199,13 @@ const Calendar = props => {
         </text>    
       </svg>
       <g>
-        <Cell x="00" y="00" height="08" rectFill="#eee" textColor={SUN_COLOR} biggerText="CN" />
-        <Cell x="15" y="00" height="08" rectFill="#eee" biggerText="T2" />
-        <Cell x="30" y="00" height="08" rectFill="#eee" biggerText="T3" />
-        <Cell x="45" y="00" height="08" rectFill="#eee" biggerText="T4" />
-        <Cell x="60" y="00" height="08" rectFill="#eee" biggerText="T5" />
-        <Cell x="75" y="00" height="08" rectFill="#eee" biggerText="T6" />
-        <Cell x="90" y="00" height="08" rectFill="#eee" textColor={SAT_COLOR} biggerText="T7" />
+        <Cell x="00" y="00" height="08" rectFill="#eee" biggerText="T2" />
+        <Cell x="15" y="00" height="08" rectFill="#eee" biggerText="T3" />
+        <Cell x="30" y="00" height="08" rectFill="#eee" biggerText="T4" />
+        <Cell x="45" y="00" height="08" rectFill="#eee" biggerText="T5" />
+        <Cell x="60" y="00" height="08" rectFill="#eee" biggerText="T6" />
+        <Cell x="75" y="00" height="08" rectFill="#eee" textColor={SAT_COLOR} biggerText="T7" />
+        <Cell x="90" y="00" height="08" rectFill="#eee" textColor={SUN_COLOR} biggerText="CN" />
       </g>
       {calendar.map(week => week.map(day => day))}
     </svg>

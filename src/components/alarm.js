@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from 'react';
 import PropsType from 'prop-types';
+import XDate from './XDate';
 import './styles.css';
 
 const Alarm = (props) => {
-  const [date, setDate] = useState(new Date());
-  const [second, setSecond] = useState(new Date().getSeconds());
-  const [minute, setMinute] = useState(new Date().getMinutes());
-  const [hour, setHour] = useState(new Date().getHours());
+  const [date, setDate] = useState(new XDate());
+  const [second, setSecond] = useState(new XDate().getSeconds());
+  const [minute, setMinute] = useState(new XDate().getMinutes());
+  const [hour, setHour] = useState(new XDate().getHours());
 
   useEffect(() => {
     setInterval(() => {
-      setDate(new Date());
-      setSecond(new Date().getSeconds());
-      setMinute(new Date().getMinutes());
-      setHour(new Date().getHours());
+      setDate(new XDate());
+      setSecond(new XDate().getSeconds());
+      setMinute(new XDate().getMinutes());
+      setHour(new XDate().getHours());
     }, 100);
   }, []);
 
